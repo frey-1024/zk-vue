@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .text-red{
+      color: red;
+    }
+    .text-gray{
+      color: gray;
+    }
+    .text-black{
+      color: black;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <p>发布---订阅模式又叫观察者模式，它定义了对象间的一种一对多的关系，让多个观察者对象同时监听某一个主题对象，当一个对象发生改变时，所有依赖于它的对象都将得到通知。</p>
+  <p>class 用法</p>
+  <div :class="classColor">Class设置文字颜色第一种情况</div>
+  <div :class="testJson.color" v-text="testJson.value"></div>
+  <div :class="getClassColor">Class设置文字颜色第二种情况</div>
+  <button @click="click1">灰色</button>
+  <button @click="click2">红色</button>
+  <br/>
+  <hr/>
+  <p>style 用法</p>
+  <div :style="styleColor">Style设置文字颜色第一种情况</div>
+  <div :style="getStyleColor">Style设置文字颜色第二种情况</div>
+  <button @click="click3">设置字体</button>
+  <br/>
+  <hr/>
+  <p>双大括号或者v-text 用法</p>
+  <div><span v-text="text"></span>第一种情况</div>
+  <div><span>{{text}}</span>第二种情况</div>
+  <button @click="click4">设置文字</button>
+  <br/>
+  <hr/>
+  <p>v-model的用法</p>
+  <div><input type="text" placeholder="请输入内容" v-model="inputVal"/></div>
+  <div>输入内容为: <span v-text="inputVal"></span></div>
+</div>
+<script src="./bundle.js"></script>
+</body>
+</html>
