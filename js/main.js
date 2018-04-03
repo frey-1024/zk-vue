@@ -62,6 +62,17 @@ const sharedPropertyDefinition = {
   get: function() {},
   set: function() {},
 };
+/*
+* computed自执行的原理：
+* 无论computed还是data我们都进行了数据绑定，并且都代理到vm上了，
+* computed 所代理的get函数就是写在computed中的函数，
+* 此时在创建watcher时，会获取这个computed中这个get函数，
+* 而get中又包含data中数据，也会执行data中绑定的get方法，也就是会执行observer的defineReactive中get方法，
+* 因为此时target = this; 也就会执行 dep.depend(); 添加watcher到这个subs中，
+* 这个时候data的观察在正常情况下就有两个了: [绑定自己的watcher， 绑定包含自己的computed的watcher]
+* 当修改data中数据时，就会执行这两个watcher，所以computed所绑定的就会自动执行
+*
+* */
 /*通过proxy函数将_data上面的数据代理到vm上，这样就可以用app.text代替app._data.text了。*/
 export function proxy (vm, sourceKey, key, getter, setter) {
   // 如果执行get方法，那么就会执行相应的观察者中的get方法
